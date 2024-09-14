@@ -24,9 +24,9 @@ export default function OrderDetails({ sessionData, locale }) {
 
   return (
     <div>
-      <div class='order-success'>
-        <div class='order-success__svg-wrapper'>
-          <svg viewBox='0 0 512 512' class='order-success__svg'>
+      <div className='order-success'>
+        <div className='order-success__svg-wrapper'>
+          <svg viewBox='0 0 512 512' className='order-success__svg'>
             <g>
               <linearGradient
                 id='a'
@@ -50,88 +50,88 @@ export default function OrderDetails({ sessionData, locale }) {
             </g>
           </svg>
         </div>
-        <h2 class='order-success__heading'>
+        <h2 className='order-success__heading'>
           {thankYouLabel} {name}!
         </h2>
-        <h3 class='order-success__subheading'>{orderConfirmedText}</h3>
-        <p class='order-success__msg'>{orderConfirmedSubText}</p>
+        <h3 className='order-success__subheading'>{orderConfirmedText}</h3>
+        <p className='order-success__msg'>{orderConfirmedSubText}</p>
       </div>
 
-      <div class='order-details'>
-        <h2 class='order-details__heading order-deatils__label'>
+      <div className='order-details'>
+        <h2 className='order-details__heading order-deatils__label'>
           {orderDetailsLabel}
         </h2>
-        <div class='order-details__content-box'>
-          <div class='order-details__info-box-inner'>
-            <h3 class='order-details__contact-info-label order-deatils__label'>
+        <div className='order-details__content-box'>
+          <div className='order-details__info-box-inner'>
+            <h3 className='order-details__contact-info-label order-deatils__label'>
               {contactInfoLabel}
             </h3>
             <div
               id='order-details-email'
-              class='order-details__email order-deatils__value'
+              className='order-details__email order-deatils__value'
             >
               {email}
             </div>
             <div
               id='order-details-name'
-              class='order-details__name order-deatils__value'
+              className='order-details__name order-deatils__value'
             >
               {name}
             </div>
           </div>
-          <div class='order-details__info-box-inner'>
-            <h3 class='order-details__address-info-label order-deatils__label'>
+          <div className='order-details__info-box-inner'>
+            <h3 className='order-details__address-info-label order-deatils__label'>
               {shippingAddressLabel}
             </h3>
             <div
               id='order-details-line-1'
-              class='order-details__line-1 order-deatils__value'
+              className='order-details__line-1 order-deatils__value'
             >
               {line1}
             </div>
             <div
               id='order-details-line-2'
-              class='order-details__line-2 order-deatils__value'
+              className='order-details__line-2 order-deatils__value'
             >
               {line2}
             </div>
             <div
               id='order-details-city-postal'
-              class='order-details__city-postal order-deatils__value'
+              className='order-details__city-postal order-deatils__value'
             >
               {city}, {postalCode}
             </div>
             <div
               id='order-details-country'
-              class='order-details__country order-deatils__value'
+              className='order-details__country order-deatils__value'
             >
               {country}
             </div>
           </div>
-          <div class='order-details__info-box-inner'>
-            <h3 class='order-details__payment-info-label order-deatils__label'>
+          <div className='order-details__info-box-inner'>
+            <h3 className='order-details__payment-info-label order-deatils__label'>
               {paymentDetailsLabel}
             </h3>
             <div
               id='order-details-amount-currency'
-              class='order-details__amount-currency order-deatils__value'
+              className='order-details__amount-currency order-deatils__value'
             >
               {amount} {currency}
             </div>
             <div
               id='order-details-payment-status'
-              class='order-details__payment-status order-deatils__value'
+              className='order-details__payment-status order-deatils__value'
             >
               {paymentStatus}
             </div>
           </div>
-          <div class='order-details__info-box-inner'>
-            <h3 class='order-details__shipping-info-label order-deatils__label'>
+          <div className='order-details__info-box-inner'>
+            <h3 className='order-details__shipping-info-label order-deatils__label'>
               {shippingMethodLabel}
             </h3>
             <div
               id='order-details-shipping'
-              class='order-details__shipping order-deatils__value'
+              className='order-details__shipping order-deatils__value'
             >
               {shippingChargesLabel}
             </div>

@@ -1,9 +1,9 @@
 export default function OrderDetails({ noInfo }) {
   return (
     <div>
-      <div class='order-success'>
-        <div class='order-success__svg-wrapper'>
-          <svg class='order-success__svg' viewBox='0 0 24 24'>
+      <div className='order-success'>
+        <div className='order-success__svg-wrapper'>
+          <svg className='order-success__svg' viewBox='0 0 24 24'>
             <g>
               <linearGradient
                 id='b'
@@ -49,7 +49,7 @@ export default function OrderDetails({ noInfo }) {
             </g>
           </svg>
         </div>
-        <h2 class='order-success__heading'>{noInfo}</h2>
+        <h2 className='order-success__heading'>{noInfo}</h2>
       </div>
     </div>
   );
