@@ -80,7 +80,10 @@ const Home = ({ sessionData, locale, hasError }) => {
         <title>{title}</title>
         <meta name='description' content={description} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
+        <link
+          rel='icon'
+          href={hasError ? "/faviconerror.ico" : "/favicon.ico"}
+        />
         {/* FACEBOOK PIXEL BASE CODE */}
         <noscript>
           <img
