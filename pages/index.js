@@ -68,6 +68,8 @@ const Home = ({ sessionData, locale, hasError }) => {
         value: (sessionData.amount_subtotal / 100).toFixed(2),
         currency: sessionData.currency.toUpperCase(),
       });
+      console.log(sessionData.amount_subtotal + "from use Effect");
+      console.log(sessionData.currency + "from use Effect");
     }
   }, [sessionData, hasError]);
 
@@ -102,6 +104,7 @@ const Home = ({ sessionData, locale, hasError }) => {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '536006748934294');
+          console.log('meta pixel initiaed');
         `}
       </Script>
       {hasError ? (
