@@ -1,3 +1,10 @@
+/* 
+QUERY PARAMETERS EXPECTED:
+-session_id = The stripe payment session id for which the info is to be retrieved (required*)
+-stripe_account_id = The id of the account on which the payment record exists (required*)
+-lang = Language of page, default is 'de' german (optional)
+*/
+
 import Head from "next/head";
 import Script from "next/script";
 import OrderDetails from "../components/OrderDetails";
@@ -75,8 +82,17 @@ const Home = ({ sessionData, locale, hasError }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
         {/* FACEBOOK PIXEL BASE CODE */}
-        <Script id='facebook-pixel' strategy='beforeInteractive'>
-          {`
+        <noscript>
+          <img
+            height='1'
+            width='1'
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=536006748934294&ev=PageView&noscript=1`}
+          />
+        </noscript>
+      </Head>
+      <Script id='facebook-pixel' strategy='beforeInteractive'>
+        {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -87,16 +103,7 @@ const Home = ({ sessionData, locale, hasError }) => {
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '536006748934294');
         `}
-        </Script>
-        <noscript>
-          <img
-            height='1'
-            width='1'
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=536006748934294&ev=PageView&noscript=1`}
-          />
-        </noscript>
-      </Head>
+      </Script>
       {hasError ? (
         <ErrorComponent
           noInfo={locale === "de" ? "Nichts gefunden!" : "Nothing found!"}
