@@ -105,6 +105,7 @@ const Home = ({ sessionData, locale, hasError }) => {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '536006748934294');
+          fbq('track', 'PageView');
         `}
       </Script>
       {hasError ? (
