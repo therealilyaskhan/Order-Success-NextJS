@@ -17,6 +17,10 @@
     "type": "git",
     "url": "git@github.com:therealilyaskhan/Order-Success-NextJS.git"
   },
+  "bugs": {
+    "url": "https://github.com/therealilyaskhan/Order-Success-NextJS/issues"
+  },
+  "homepage": "https://github.com/therealilyaskhan/Order-Success-NextJS#readme",
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
