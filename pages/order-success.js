@@ -1,13 +1,5 @@
-/* 
-QUERY PARAMETERS EXPECTED:
--session_id = The stripe payment session id for which the info is to be retrieved (required*)
--stripe_account_id = The id of the account on which the payment record exists (required*)
--lang = Language of page, default is 'de' german (optional)
-*/
-
 import Head from "next/head";
 import Script from "next/script";
-import { redirect } from "next/navigation";
 import OrderDetails from "../components/OrderDetails";
 import ErrorComponent from "../components/ErrorComponent";
 import { useEffect } from "react";
@@ -55,24 +47,22 @@ const getTitle = (locale) => localeTitles[locale] || localeTitles.de;
 const getDescription = (locale) =>
   localeDescriptions[locale] || localeDescriptions.de;
 
-const Home = ({ sessionData, locale, hasError, newQueryParams }) => {
+const OrderSuccess = ({ sessionData, locale, hasError }) => {
   // Facebook Pixel Purchase Event Trigger
   useEffect(() => {
     if (
       !hasError &&
       sessionData &&
       sessionData.amount_subtotal &&
-      sessionData.currency &&
-      newQueryParams
+      sessionData.currency
     ) {
-      console.log(newQueryParams);
       // Trigger the purchase event
       window.fbq("track", "Purchase", {
         value: (sessionData.amount_subtotal / 100).toFixed(2),
         currency: sessionData.currency.toUpperCase(),
       });
     }
-  }, [sessionData, hasError, newQueryParams]);
+  }, [sessionData, hasError]);
 
   const title = getTitle(locale);
   const description = getDescription(locale);
@@ -126,7 +116,6 @@ export async function getServerSideProps({ query }) {
     session_id: sessionId,
     stripe_account_id: stripeId,
     lang: locale = "de",
-    utm_term: utmTerm,
   } = query;
 
   if (!sessionId || !stripeId) {
@@ -138,46 +127,19 @@ export async function getServerSideProps({ query }) {
     };
   }
 
-  // Make a request to the Node.js server with the session_id
-  const res = await fetch(
+  // Fetch session data from external API
+  const sessionRes = await fetch(
     `https://session-retriever.vercel.app/order/success?session_id=${sessionId}&stripe_account_id=${stripeId}`
   );
-  const sessionData = await res.json();
-
-  // pass the UUID key to the server to get the queryString contaning info about the ad against the key:
-  const fbAdDataFetch = await fetch(
-    `https://session-retriever.vercel.app/get-data/${utmTerm}`
-  );
-  const fbAdQueryObj = await fbAdDataFetch.json();
-  /*
-  SAMPLE RESPONSE:
-  {
-    "utm_medium": "paid",
-    "utm_id": "120212287035680162",
-    "utm_content": "120212287184820162",
-    "utm_campaign": "120212287035680162",
-    "fbclid": "IwY2xjawFToSRleHRuA2FlbQEwAAEdTNPE8IuDTgiE-rBLXTnfkcE_JfWH-jeU3BRk2MeLylbK0MaptKc-15KX_aem_ijG5AstIgfVostZONxjmfA",
-    "utm_source": "facebook",
-    "campaign_id": "120212287035670162",
-    "ad_id": "120212287184820162"
-  }
-  */
-
-  // Build the new query parameters for the redirect
-  const newQueryParams = new URLSearchParams({
-    session_id: sessionId,
-    stripe_account_id: stripeId,
-    lang: locale,
-    ...fbAdQueryObj, // This will spread the parameters from fbAdQueryObj
-  }).toString();
-
-  const newUrl = `/order-success?${newQueryParams}`;
-
-  redirect(newUrl);
+  const sessionData = await sessionRes.json();
 
   return {
-    props: {},
+    props: {
+      sessionData,
+      locale,
+      hasError: false,
+    },
   };
 }
 
-export default Home;
+export default OrderSuccess;
