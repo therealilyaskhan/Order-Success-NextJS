@@ -122,7 +122,7 @@ const Home = ({ sessionData, locale, hasError, fbAdQueryString }) => {
 
 export async function getServerSideProps({ query }) {
   const {
-    utm_campaign: utmCampaign,
+    utm_term: utmTerm,
     session_id: sessionId,
     stripe_account_id: stripeId,
     lang: locale = "de",
@@ -145,7 +145,7 @@ export async function getServerSideProps({ query }) {
 
   // pass the UUID key to the server to get the queryString contaning info about the ad against the key:
   const fbAdDataFetch = await fetch(
-    `https://session-retriever.vercel.app/get-data/${utmCampaign}`
+    `https://session-retriever.vercel.app/get-data/${utmTerm}`
   );
   const fbAdQueryString = await fbAdDataFetch.json();
 
