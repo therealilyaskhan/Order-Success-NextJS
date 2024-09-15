@@ -7,7 +7,7 @@ QUERY PARAMETERS EXPECTED:
 
 import Head from "next/head";
 import Script from "next/script";
-import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import OrderDetails from "../components/OrderDetails";
 import ErrorComponent from "../components/ErrorComponent";
 import { useEffect } from "react";
@@ -173,10 +173,11 @@ export async function getServerSideProps({ query }) {
 
   const newUrl = `/order-success?${newQueryParams}`;
 
-  redirect(newUrl);
-
   return {
-    props: {},
+    redirect: {
+      destination: newUrl,
+      permanent: false, // Use a 302 (temporary) redirect
+    },
   };
 }
 
