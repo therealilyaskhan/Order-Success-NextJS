@@ -105,7 +105,15 @@ const Home = ({ sessionData, locale, hasError }) => {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '536006748934294');
-          fbq('track', 'PageView');
+        `}
+      </Script>
+      <Script>
+        {`
+          window.addEventListener("message", function (event) {
+            if (event.origin !== "https://lucernekammere.com") return;
+            const data = JSON.parse(event.data);
+            this.localStorage.setItem("fb_query_params", data);
+          });
         `}
       </Script>
       {hasError ? (
