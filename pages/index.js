@@ -54,14 +54,15 @@ const getTitle = (locale) => localeTitles[locale] || localeTitles.de;
 const getDescription = (locale) =>
   localeDescriptions[locale] || localeDescriptions.de;
 
-const Home = ({ sessionData, locale, hasError }) => {
+const Home = ({ sessionData, locale, hasError, fbAdQueryString }) => {
   // Facebook Pixel Purchase Event Trigger
   useEffect(() => {
     if (
       !hasError &&
       sessionData &&
       sessionData.amount_subtotal &&
-      sessionData.currency
+      sessionData.currency &&
+      fbAdQueryString
     ) {
       // Trigger the purchase event
       window.fbq("track", "Purchase", {
@@ -69,7 +70,7 @@ const Home = ({ sessionData, locale, hasError }) => {
         currency: sessionData.currency.toUpperCase(),
       });
     }
-  }, [sessionData, hasError]);
+  }, [sessionData, hasError, fbAdQueryString]);
 
   const title = getTitle(locale);
   const description = getDescription(locale);
@@ -94,6 +95,11 @@ const Home = ({ sessionData, locale, hasError }) => {
           />
         </noscript>
       </Head>
+      <Script id='url-redirect-script' strategy='beforeInteractive'>
+        {`
+          console.log(fbAdQueryString);
+        `}
+      </Script>
       <Script id='facebook-pixel' strategy='beforeInteractive'>
         {`
           !function(f,b,e,v,n,t,s)
@@ -120,6 +126,7 @@ const Home = ({ sessionData, locale, hasError }) => {
 
 export async function getServerSideProps({ query }) {
   const {
+    utm_campaign: utmCampaign,
     session_id: sessionId,
     stripe_account_id: stripeId,
     lang: locale = "de",
@@ -140,10 +147,17 @@ export async function getServerSideProps({ query }) {
   );
   const sessionData = await res.json();
 
+  // pass the UUID key to the server to get the queryString contaning info about the ad against the key:
+  const fbAdDataFetch = await fetch(
+    `https://session-retriever.vercel.app/get-data/${utmCampaign}`
+  );
+  const fbAdQueryString = await fbAdDataFetch.json();
+
   return {
     props: {
       sessionData,
       locale,
+      fbAdQueryString,
       hasError: false,
     },
   };
