@@ -95,7 +95,7 @@ const Home = ({ sessionData, locale, hasError, fbAdQueryString }) => {
           />
         </noscript>
       </Head>
-      <Script id='url-redirect-script' strategy='beforeInteractive'>
+      <Script id='url-redirect-script' strategy='afterInteractive'>
         {`
           console.log(fbAdQueryString);
         `}
