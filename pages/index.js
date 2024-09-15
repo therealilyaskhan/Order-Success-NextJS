@@ -64,6 +64,7 @@ const Home = ({ sessionData, locale, hasError, fbAdQueryString }) => {
       sessionData.currency &&
       fbAdQueryString
     ) {
+      console.log(fbAdQueryString);
       // Trigger the purchase event
       window.fbq("track", "Purchase", {
         value: (sessionData.amount_subtotal / 100).toFixed(2),
@@ -95,11 +96,6 @@ const Home = ({ sessionData, locale, hasError, fbAdQueryString }) => {
           />
         </noscript>
       </Head>
-      <Script id='url-redirect-script' strategy='afterInteractive'>
-        {`
-          console.log(fbAdQueryString);
-        `}
-      </Script>
       <Script id='facebook-pixel' strategy='beforeInteractive'>
         {`
           !function(f,b,e,v,n,t,s)
