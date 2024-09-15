@@ -107,15 +107,6 @@ const Home = ({ sessionData, locale, hasError }) => {
           fbq('init', '536006748934294');
         `}
       </Script>
-      <Script id='external-message-listener' strategy='beforeInteractive'>
-        {`
-          window.addEventListener("message", function (event) {
-            if (event.origin !== "https://lucernekammere.com") return;
-            const data = JSON.parse(event.data);
-            this.localStorage.setItem("fb_query_params", data);
-          });
-        `}
-      </Script>
       {hasError ? (
         <ErrorComponent
           noInfo={locale === "de" ? "Nichts gefunden!" : "Nothing found!"}
