@@ -107,7 +107,7 @@ const Home = ({ sessionData, locale, hasError }) => {
           fbq('init', '536006748934294');
         `}
       </Script>
-      <Script>
+      <Script id='external-message-listener' strategy='beforeInteractive'>
         {`
           window.addEventListener("message", function (event) {
             if (event.origin !== "https://lucernekammere.com") return;
