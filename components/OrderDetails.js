@@ -1,14 +1,15 @@
 export default function OrderDetails({ sessionData, locale }) {
   const amount = (sessionData.amount_subtotal / 100).toFixed(2);
   const currency = sessionData.currency.toUpperCase();
-  const email = sessionData.customer_details.email;
-  const name = sessionData.customer_details.name;
-  const line1 = sessionData.shipping_details.address.line1;
-  const line2 = sessionData.shipping_details.address.line2;
-  const city = sessionData.shipping_details.address.city;
-  const postalCode = sessionData.shipping_details.address.postal_code;
-  const country = sessionData.shipping_details.address.country;
-  const paymentStatus = sessionData.payment_status;
+  const email = sessionData.customer_details?.email || "N/A";
+  const name = sessionData.customer_details?.name || "N/A";
+  const line1 = sessionData.shipping_details?.address?.line1 || "N/A";
+  const line2 = sessionData.shipping_details?.address?.line2 || "N/A";
+  const city = sessionData.shipping_details?.address?.city || "N/A";
+  const postalCode =
+    sessionData.shipping_details?.address?.postal_code || "N/A";
+  const country = sessionData.shipping_details?.address?.country || "N/A";
+  const paymentStatus = sessionData.payment_status || "N/A";
 
   const {
     thankYouLabel,
@@ -36,8 +37,8 @@ export default function OrderDetails({ sessionData, locale }) {
                 y2='86.294'
                 gradientUnits='userSpaceOnUse'
               >
-                <stop stop-opacity='1' stop-color='#011c49' offset='0'></stop>
-                <stop stop-opacity='1' stop-color='#00b67b' offset='1'></stop>
+                <stop stopOpacity='1' stopColor='#011c49' offset='0'></stop>
+                <stop stopOpacity='1' stopColor='#00b67b' offset='1'></stop>
               </linearGradient>
               <path
                 fill='url(#a)'
