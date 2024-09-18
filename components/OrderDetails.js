@@ -1,15 +1,14 @@
 export default function OrderDetails({ sessionData, locale }) {
   const amount = (sessionData.amount_subtotal / 100).toFixed(2);
   const currency = sessionData.currency.toUpperCase();
-  const email = sessionData.customer_details?.email || "N/A";
-  const name = sessionData.customer_details?.name || "N/A";
-  const line1 = sessionData.shipping_details?.address?.line1 || "N/A";
-  const line2 = sessionData.shipping_details?.address?.line2 || "N/A";
-  const city = sessionData.shipping_details?.address?.city || "N/A";
-  const postalCode =
-    sessionData.shipping_details?.address?.postal_code || "N/A";
-  const country = sessionData.shipping_details?.address?.country || "N/A";
-  const paymentStatus = sessionData.payment_status || "N/A";
+  const email = sessionData.customer_details?.email || "-";
+  const name = sessionData.customer_details?.name || null;
+  const line1 = sessionData.shipping_details?.address?.line1 || "-";
+  const line2 = sessionData.shipping_details?.address?.line2 || "-";
+  const city = sessionData.shipping_details?.address?.city || "-";
+  const postalCode = sessionData.shipping_details?.address?.postal_code || "-";
+  const country = sessionData.shipping_details?.address?.country || "-";
+  const paymentStatus = sessionData.payment_status || "-";
 
   const {
     thankYouLabel,
@@ -52,7 +51,7 @@ export default function OrderDetails({ sessionData, locale }) {
           </svg>
         </div>
         <h2 className='order-success__heading'>
-          {thankYouLabel} {name}!
+          {thankYouLabel} {name ? name : ""}!
         </h2>
         <h3 className='order-success__subheading'>{orderConfirmedText}</h3>
         <p className='order-success__msg'>{orderConfirmedSubText}</p>
