@@ -47,7 +47,13 @@ const getTitle = (locale) => localeTitles[locale] || localeTitles.de;
 const getDescription = (locale) =>
   localeDescriptions[locale] || localeDescriptions.de;
 
-const OrderSuccess = ({ sessionData, locale, hasError }) => {
+const OrderSuccess = ({
+  sessionData,
+  locale,
+  hasError,
+  sessionId,
+  stripeId,
+}) => {
   // Facebook Pixel Purchase Event Trigger
   useEffect(() => {
     if (
@@ -61,8 +67,25 @@ const OrderSuccess = ({ sessionData, locale, hasError }) => {
         value: (sessionData.amount_subtotal / 100).toFixed(2),
         currency: sessionData.currency.toUpperCase(),
       });
+
+      // posting the session id and the stripe account the session is associated with
+      if (sessionId && stripeId) {
+        fetch("https://session-retriever.vercel.app/store-checkout-data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            session_id: sessionId,
+            stripe_account_id: stripeId,
+          }).toString(),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log("data posted to redis:", data))
+          .catch((error) => console.error(error));
+      }
     }
-  }, [sessionData, hasError]);
+  }, [sessionData, hasError, sessionId, stripeId]);
 
   const title = getTitle(locale);
   const description = getDescription(locale);
@@ -138,6 +161,8 @@ export async function getServerSideProps({ query }) {
       sessionData,
       locale,
       hasError: false,
+      sessionId,
+      stripeId,
     },
   };
 }
