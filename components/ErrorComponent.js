@@ -13,8 +13,8 @@ export default function OrderDetails({ noInfo }) {
                 y2='24'
                 gradientUnits='userSpaceOnUse'
               >
-                <stop stop-opacity='1' stop-color='#7c008c' offset='0'></stop>
-                <stop stop-opacity='1' stop-color='#ff0000' offset='1'></stop>
+                <stop stopOpacity='1' stopColor='#7c008c' offset='0'></stop>
+                <stop stopOpacity='1' stopColor='#ff0000' offset='1'></stop>
               </linearGradient>
               <clipPath id='a'>
                 <path
@@ -26,9 +26,9 @@ export default function OrderDetails({ noInfo }) {
               </clipPath>
               <g
                 fill='url(#b)'
-                fill-rule='evenodd'
-                clip-path='url(#a)'
-                clip-rule='evenodd'
+                fillRule='evenodd'
+                clipPath='url(#a)'
+                clipRule='evenodd'
               >
                 <path
                   d='M4.8 6c-.495 0-.957.419-1.005.9l-.003.027L2 20.964v.135a.9.9 0 0 0 .9.901h8.2a1 1 0 1 1 0 2H2.9C1.382 24 0 22.786 0 21.1v-.2a1 1 0 0 1 .008-.127L1.807 6.685C1.966 5.173 3.3 4 4.8 4h12.5c1.499 0 2.832 1.17 2.993 2.68l.598 4.385a1 1 0 1 1-1.982.27l-.6-4.4a1.06 1.06 0 0 1-.004-.035c-.048-.481-.51-.9-1.005-.9z'
