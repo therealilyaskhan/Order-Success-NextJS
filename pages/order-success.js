@@ -53,6 +53,7 @@ const OrderSuccess = ({
   hasError,
   sessionId,
   stripeId,
+  redisId,
 }) => {
   // Facebook Pixel Purchase Event Trigger
   useEffect(() => {
@@ -78,6 +79,7 @@ const OrderSuccess = ({
           body: new URLSearchParams({
             session_id: sessionId,
             stripe_account_id: stripeId,
+            redis_obj_id: redisId,
           }).toString(),
         })
           .then((response) => response.json())
@@ -139,6 +141,7 @@ export async function getServerSideProps({ query }) {
     session_id: sessionId,
     stripe_account_id: stripeId,
     lang: locale = "de",
+    redis_id: redisId,
   } = query;
 
   if (!sessionId || !stripeId) {
@@ -163,6 +166,7 @@ export async function getServerSideProps({ query }) {
       hasError: false,
       sessionId,
       stripeId,
+      redisId,
     },
   };
 }

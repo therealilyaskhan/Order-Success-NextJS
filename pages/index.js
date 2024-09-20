@@ -119,6 +119,7 @@ export async function getServerSideProps({ query }) {
     session_id: sessionId,
     stripe_account_id: stripeId,
     lang: locale,
+    redis_id: utmTerm,
     ...fbAdQueryObj, // This will spread the parameters from fbAdQueryObj
   }).toString();
 
